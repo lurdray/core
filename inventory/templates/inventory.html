@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} Home {% endblock title %}
+
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+          
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-12 connectedSortable">
+
+
+
+    
+
+
+                <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title"><a href="{% url 'new-stock' %} "><button class="btn btn-primary" style="background: linear-gradient(to right,#6f448b, #ED5565); color: #fff">Add New Stock</button></a></h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+              <div class="card card-primary">
+              <div class="card-header" style="background: linear-gradient(to right,#6f448b, #ED5565);">
+                <h3 class="card-title">Inventory</h3>
+              </div>
+              <!-- /.card-header -->
+              
+                <div class="card-body">
+                  <form method="get">
+            <div class="input-group search col-md-5">
+                {% render_field filter.form.name class="form-control textinput" placeholder="Search by stock name" %}
+                <div class="input-group-append" style="float: right;">
+                   <button type="submit" class="btn btn-pink" style="background: linear-gradient(to right,#6f448b, #ED5565);float: right; color: #fff;"> Search </button>
+                </div>
+            </div>
+
+
+        </form>
+               <hr> 
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+
+                <table class="table table-hover text-nowrap">
+
+                  <thead>
+                    <tr>
+                      <tr>
+                    <th>S/N</th>
+                    <th>Stock Name</th>
+                    <th>Quantity in Stock</th>
+                    <th>Threshold</th>
+                    <th>SIZE</th>
+                    <th>LOCATION</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    </tr>
+                  </thead>
+
+                  {% if object_list %}
+                  <tbody>
+                    {% for stock in object_list %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ stock.name }}</td>
+                      
+                      <td>{{ stock.quantity }}</td>
+                      {% if stock.quantity <= stock.threshold %}
+                        <td><a class="badge badge-danger">{{ stock.threshold }}</a></td>
+                      {% else %}
+                        <td>{{ stock.threshold }}</td>
+                      {% endif %}
+                      <td>{{ stock.size }}</td>
+                      <td>{{ stock.location}}</td>
+                      <td> <a href="{% url 'edit-stock' stock.pk %}" class="btn btn-success">Edit Details</a></td>
+                      <td><a href="{% url 'delete-stock' stock.pk %}" class="btn btn-danger"> Delete Stock </a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                  
+                </table>
+
+                <div class="align-middle">
+        {% if is_paginated %}
+
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+{% else %}
+
+        <tbody></tbody>   
+    </table>
+    <div style="color: #ea2088; font-style: bold; font-size: 1.5rem; text-align: center;">No, Inventory</div>
+
+
+        </div>
+    </div>
+
+      {% endif %}
+              </div>
+              <!-- /.card-body -->
+            
+
+
+                <div class="card-footer">
+                  
+                </div>
+              
+            
+              
+
+            </div>
+            <!-- /.row -->
+                <div class="card">
+                  <div class="card-header">
+                <h3 class="card-title">
+                  <i class="ion ion-clipboard mr-1"></i>
+                 
+                </h3>
+
+                <div class="card-tools">
+                  <ul class="pagination pagination-sm">
+                    {% if queryset.has_previous %}
+                    <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.previous_page_number }}" class="page-link">&laquo;</a></li>
+                    {% endif %}
+                    {% if queryset.has_previous %}
+                    <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.previous_page_number }}" class="page-link">{{ queryset.previous_page_number }}</a></li>
+                    {% endif %}
+                    <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.number }}" class="page-link  ">{{ queryset.number }}</a></li>
+                    {% if queryset.has_next %}
+                    <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link active ">{{ queryset.next_page_number }}</a></li>
+                   {% endif %}
+                    {% if queryset.has_next %}
+                    <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link">&raquo;</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+              </div>
+              </div>
+              
+      
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+
+        
+
+
+
+
+
+
+            
+
+          
+
+            
+
+            
+                
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  {% endblock %}
+ 
+
+
+    

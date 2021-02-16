@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block title %} About {% endblock title %}
+
+
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-12 connectedSortable">
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-chart-pie mr-1"></i>
+                  About
+                </h3>
+                <div class="card-tools">
+                  <ul class="nav nav-pills ml-auto">
+                    <li class="nav-item">
+                      {% if not user.is_authenticated  %}
+                      <a class="nav-link active" href="{% url 'home' %}">Go Back</a>
+                      {% endif %}  
+                    </li>
+                  </ul>
+                </div>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content p-0">
+                  <!-- Morris chart - Sales -->
+    
+    <div class="text-center" style="color: #6f448b; font-style: bold; font-size: 3rem;"><img src="{% static 'img/logo.jpg' %}"></div>
+    <div class="text-center" style="color: #6f448b">Inventory Management System</div>
+   
+
+    <div class="text-center"> 
+        <h3 style="color:#6f448b8">| About |</h3> <br>
+            <p>
+                Interior Woodwork Limited Store Management is a comprehensive store management software created for the requirements of the company.
+                The software is capable of keeping track of incoming and outgoing stock with a dynamically rendered bill. 
+                
+            </p>
+      
+    </div>
+        <h3 style="color:#6f448b" class="text-center">| Features |</h3> <br>
+            <ul style="display:table; margin:0 auto;">                
+                <li>Interactive Chart to display current available stock</li>
+                <li>Stock details like current available stock are maintained</li>
+                <li>Incoming transactions are done through purchases</li>
+                <li>Outgoing transactions are done through Specific Projects</li>
+                <li>Every transaction performed through the software is recorded</li>
+                <li>Bill is dynamically rendered and can be printed</li>
+                <li>Separate profiles are maintained for suppliers</li>
+            </ul>  
+        <br>
+    <div class="text-center">
+        <h4 style="color:#6f448b" >| Developer |</h4> <br>
+            <a target="_blank" href="https://nigtech" >Ibrahim Muritala</a>
+          
+    </div>
+                  
+                </div>
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            
+          </section>
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+
+  </div>
+</div>
+
+  {% endblock %}

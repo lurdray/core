@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+{% if messages %}
+    <ul class="messages text-center" style="background-color: #6f448b; color: #fff;>
+      {% for message in messages %}
+      <li "{% if message.tags %} class="{{ messages.tags}}" {% endif %} style="margin: 250px">{{message}} </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 style="color:#fff">Bin Card</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Bin Card</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+       
+
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">STOCK RECIEPT CLIP</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+
+              <!-- /.card-header -->
+              
+              
+                
+              
+
+    
+    <form method="post">
+    {% csrf_token %}
+
+        <div class="bg">
+        
+
+
+            <div id="printArea" class="bg">
+               <table class="table table-bordered">
+                  <tbody>
+                    
+                        <tr style="height: 1px;">
+                            <td> <p style="text-align: center;">ISSUANCE SLIP</p> </td>
+                        </tr>
+                    
+                        <tr style="text-align: center;">
+                            <td >
+                                <span style="font-size: 350%;"><img src="{% static 'img/logo.jpg' %}"></span> <br>
+                                <span style="font-size: 120%; font-weight: bold; text-decoration: underline;">ITEMS ISSUED OUT</span> <br>
+                               
+                                <span style="text-decoration: underline; font-weight: bold;">DEPARTMENT : Store</span> <br><br>
+                            </td>
+                        </tr>
+                    
+                        <tr>
+                            <td>
+                            <table class="outer-box" style="width: 100%; margin-left: auto; margin-right: auto;">
+                                <tbody>
+                                    <tr>
+                                        <td class="inner-box" style="text-align: center; font-weight: bold;" colspan="3">WORK-ORDER - {{ bill.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inner-box" style="width: 50%; font-weight: bold;">&nbsp;NAME OF RECIEVER</td>
+                                        <td class="inner-box" style="width: 25%; font-weight: bold;">&nbsp;INVOICE NO</td>
+                                        <td class="inner-box" style="width: 25%;">&nbsp;{{ bill.billno }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inner-box" style="width: 50%;">&nbsp;{{ bill.name }}</td>
+                                        <td class="inner-box" style="width: 25%; font-weight: bold;">&nbsp;DATE</td>
+                                        <td class="inner-box" style="width: 25%;">&nbsp;{{ bill.time.date }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inner-box" style="width: 50%;" rowspan="3">{{ bill.address|linebreaks }}</td>
+                                        <td class="inner-box" style="width: 25%; font-weight: bold;">&nbsp;WORK ORDER</td>
+                                        <td class="inner-box" style="width: 25%;">&nbsp;{{ bill.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="inner-box" style="width: 25%; font-weight: bold;">&nbsp;DEPARTMENT</td>
+                                        <td class="inner-box" style="width: 25%;">&nbsp;{{ bill.email }}</td>
+                                    </tr>
+                                    
+                                    
+                                </tbody>
+                            </table>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                            <table class="outer-box" style="width: auto; margin-left: auto; margin-right: auto;">
+                                <tbody>
+                                    <tr>
+                                        <td class="inner-box" style="width: 10%; font-weight: bold; text-align: center;">&nbsp;S/N</td>
+                                        <td class="inner-box" style="width: 55%; font-weight: bold; text-align: center;">ITEMS ISSUED</td>
+                                        <td class="inner-box" style="width: 23%; font-weight: bold; text-align: center;">SIZE</td>
+                                        <td class="inner-box" style="width: 22%; font-weight: bold; text-align: center;">QUANTITY ISSUED</td>
+
+                                        
+                                    </tr>
+                                    {% for item in items %}
+                                        <tr style="height: auto;">
+                                            <td class="inner-box" style="width: 5%;">&nbsp; {{ forloop.counter }}</td>
+                                            <td class="inner-box" style="width: 32%;">&nbsp; {{ item.stock.name }}</td>
+                                             <td class="inner-box" style="width: 32%;">&nbsp; {{ item.stock.size }}</td>
+                                            <td class="inner-box" style="width: 13%;">&nbsp; {{ item.quantity }}</td>
+
+                                            
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            </td>
+                        </tr>
+                        
+                       
+
+                        <tr>
+                            
+                            <td style="text-align: center; ">
+                                
+                                <span style=" ">FOR COMPANY <br><br>----------------<br><br> Signature</span>
+                            </td>
+                        </tr>
+
+
+                       
+
+                    </tbody>
+                </table>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="wrapper" style="margin: 5px">
+             <button class="center btn btn-default" onclick="printpage('printArea')" style="margin-left: 5px;"><i class="fas fa-print"></i>Print</button>
+             <a href="{% url 'purchases-list' %}" class=" btn btn-danger float-right">Go Back</a>
+             <button type="submit" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <i class="fas fa-download"></i> Save Draft
+                  </button>
+            
+        </div>
+
+    </form>
+
+    <script>
+        function printpage(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }       
+        </script>
+              </div>
+              <!-- /.card-body -->
+            
+
+
+                
+
+            
+          </div>
+        </div>
+
+
+
+            
+
+         
+        </div>
+        <!-- /.card -->
+
+           
+            <!-- /.card -->
+            <br>
+          </div>
+          <!-- /.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  </div>
+  
+{% endblock %}
